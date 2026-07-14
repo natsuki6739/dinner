@@ -249,7 +249,9 @@ async function verifyPage(candidate) {
       const extractedName = clean(ld?.name || '');
       const expected = normalizeTitleForMatch(candidate.name);
       const titleText = normalizeTitleForMatch(`${extractedName} ${pageTitle}`);
-      const titleMatched = expected.length >= 2 && titleText.includes(expected.slice(0, Math.min(expected.length, 16)));
+      const titleMatched = expected.length >= 2
+        ? titleText.includes(expected.slice(0, Math.min(expected.length, 16)))
+        : Boolean(extractedName);
 
       return {
         ok: true,
@@ -309,82 +311,136 @@ function tagsFor(recipe, ingredients, proteinFoods) {
 }
 
 async function main() {
-  console.log('公開済みの日本語レシピデータを取得しています。');
-  const [recipeRes, ingredientRes, stepRes] = await Promise.all([
-    fetchText(SOURCE_URLS.recipes),
-    fetchText(SOURCE_URLS.ingredients),
-    fetchText(SOURCE_URLS.steps),
-  ]);
+  console.log('公開済みの日本語レシピ候補を取得しています。');
 
-  const metadata = recipeRes.text.split(/\r?\n/).map(parseRecipeLine).filter(Boolean);
-  const ingredientRows = ingredientRes.text.split(/\r?\n/).map(parseIngredientLine).filter(Boolean);
-  const stepRows = stepRes.text.split(/\r?\n/).map(parseStepLine).filter(Boolean);
+  // 元データの recipes.csv / make_list.csv は一部しか収録されていないため、
+  // 6万行以上ある材料データからレシピIDを復元し、現在の公開ページを直接確認する。
+  const ingredientRes = await fetchText(SOURCE_URLS.ingredients);
+  const ingredientRows = ingredientRes.text
+    .split(/\r?\n/)
+    .map(parseIngredientLine)
+    .filter(Boolean);
   const ingredientsById = groupById(ingredientRows);
-  const stepsById = groupById(stepRows);
 
-  console.log(`候補: ${metadata.length}件、材料行: ${ingredientRows.length}、手順行: ${stepRows.length}`);
+  console.log(`材料行: ${ingredientRows.length}、レシピID候補: ${ingredientsById.size}`);
 
-  const candidates = metadata
-    .map(recipe => {
-      const ingredients = ingredientsById.get(recipe.id) || [];
-      const steps = stepsById.get(recipe.id) || [];
+  const candidates = [...ingredientsById.entries()]
+    .map(([id, ingredients]) => {
+      // Kikkoman dataset IDs such as 30000025 correspond to page ID 00000025.
+      const pageId = (id.startsWith('3') ? id.slice(1) : id).padStart(8, '0');
+      const recipe = {
+        id,
+        name: '',
+        calories: null,
+        saltGrams: null,
+        servings: null,
+        timeMinutes: null,
+        ingredientCount: ingredients.length,
+        stepCount: null,
+        url: `https://www.kikkoman.co.jp/homecook/search/recipe/${pageId}/index.html`,
+      };
       const protein = proteinInfo(recipe, ingredients);
-      return { ...recipe, ingredients, steps, protein };
+      return { ...recipe, ingredients, steps: [], protein };
     })
-    .filter(item => item.ingredients.length >= 3 && item.steps.length >= 1)
-    .filter(item => !dessertPatterns.test(item.name))
+    .filter(item => /^3\d{7}$/.test(item.id))
+    .filter(item => item.ingredients.length >= 3)
     .filter(item => item.protein.score >= 6)
-    .sort((a, b) => b.protein.score - a.protein.score || a.timeMinutes - b.timeMinutes || a.id.localeCompare(b.id));
+    .sort((a, b) => b.protein.score - a.protein.score || a.id.localeCompare(b.id));
 
-  if (candidates.length < TARGET) throw new Error(`筋トレ向け候補が${candidates.length}件しかありません。`);
+  console.log(`筋トレ向け候補: ${candidates.length}件`);
+  if (candidates.length < TARGET) {
+    throw new Error(`材料データから作れる筋トレ向け候補が${candidates.length}件しかありません。`);
+  }
 
-  // Extra candidates are checked because some old pages may be unavailable.
-  const toCheck = candidates.slice(0, Math.min(candidates.length, TARGET + 260));
-  console.log(`${toCheck.length}ページを1件ずつHTTP取得して確認します。`);
-
+  const MAX_PAGES = Math.min(candidates.length, 1800);
+  const BATCH_SIZE = 100;
+  const valid = [];
+  const verifications = [];
+  const seenUrls = new Set();
   let completed = 0;
-  const verifications = await mapWithConcurrency(toCheck, 8, async candidate => {
-    const verification = await verifyPage(candidate);
-    completed += 1;
-    if (completed % 25 === 0 || completed === toCheck.length) {
-      console.log(`確認済み ${completed}/${toCheck.length}`);
+
+  console.log(`最大${MAX_PAGES}ページを、現在の公開ページから1件ずつ確認します。`);
+
+  for (let offset = 0; offset < MAX_PAGES && valid.length < TARGET; offset += BATCH_SIZE) {
+    const batch = candidates.slice(offset, Math.min(offset + BATCH_SIZE, MAX_PAGES));
+    const batchResults = await mapWithConcurrency(batch, 4, async candidate => {
+      const verification = await verifyPage(candidate);
+      completed += 1;
+      if (completed % 25 === 0 || completed === MAX_PAGES) {
+        console.log(`確認済み ${completed}/${MAX_PAGES}・合格 ${valid.length}/${TARGET}`);
+      }
+      return { candidate, verification };
+    });
+
+    verifications.push(...batchResults);
+
+    for (const item of batchResults) {
+      const { verification } = item;
+      const ldIngredients = Array.isArray(verification.jsonLd?.recipeIngredient)
+        ? verification.jsonLd.recipeIngredient.map(value => clean(value)).filter(Boolean)
+        : [];
+      const ldSteps = jsonLdSteps(verification.jsonLd);
+      const name = clean(verification.jsonLd?.name || '');
+      const finalUrl = clean(verification.finalUrl || item.candidate.url);
+
+      const pageIsUsable = verification.ok
+        && Boolean(verification.jsonLd)
+        && Boolean(name)
+        && ldIngredients.length >= 3
+        && ldSteps.length >= 1
+        && /^https?:\/\//.test(finalUrl)
+        && !seenUrls.has(finalUrl);
+
+      if (pageIsUsable) {
+        seenUrls.add(finalUrl);
+        valid.push(item);
+        if (valid.length >= TARGET) break;
+      }
     }
-    return { candidate, verification };
-  });
 
-  const valid = verifications.filter(item => item.verification.ok).slice(0, TARGET);
-  if (valid.length < TARGET) throw new Error(`有効なページは${valid.length}件で、500件に届きませんでした。`);
+    console.log(`バッチ完了・確認 ${completed}件・合格 ${valid.length}/${TARGET}`);
+    if (valid.length < TARGET) await sleep(700);
+  }
 
-  const recipes = valid.map(({ candidate, verification }, index) => {
-    const ldIngredients = Array.isArray(verification.jsonLd?.recipeIngredient)
-      ? verification.jsonLd.recipeIngredient.map(value => clean(value)).filter(Boolean)
-      : [];
+  if (valid.length < TARGET) {
+    throw new Error(`現在の公開ページで必要データを確認できたのは${valid.length}件で、500件に届きませんでした。`);
+  }
+
+  const recipes = valid.slice(0, TARGET).map(({ candidate, verification }, index) => {
+    const ldIngredients = verification.jsonLd.recipeIngredient
+      .map(value => clean(value))
+      .filter(Boolean);
     const ldSteps = jsonLdSteps(verification.jsonLd);
-    const sourceIngredients = ldIngredients.length >= 3
-      ? ldIngredients
-      : candidate.ingredients.map(normalizeIngredient).filter(Boolean);
-    const sourceSteps = ldSteps.length >= 1 ? ldSteps : candidate.steps;
-    const timeFromLd = parseIsoDuration(verification.jsonLd?.totalTime || verification.jsonLd?.cookTime || verification.jsonLd?.prepTime);
-    const name = clean(verification.jsonLd?.name) || candidate.name;
+    const name = clean(verification.jsonLd.name);
+    const timeFromLd = parseIsoDuration(
+      verification.jsonLd.totalTime
+      || verification.jsonLd.cookTime
+      || verification.jsonLd.prepTime
+    );
+
+    // 現在のページ上の材料でも、たんぱく質分類を再計算する。
+    const liveIngredientRows = ldIngredients.map(value => ({ name: value, amount: '' }));
+    const liveProtein = proteinInfo({ name }, liveIngredientRows);
+    const effectiveProtein = liveProtein.score >= 6 ? liveProtein : candidate.protein;
     const goals = ['maintain', 'muscle'];
-    if (candidate.protein.lean && candidate.calories > 0 && candidate.calories <= 500) goals.push('cut');
+    if (effectiveProtein.lean) goals.push('cut');
 
     return {
       id: `jp-kikkoman-${String(index + 1).padStart(4, '0')}`,
       sourceRecipeId: candidate.id,
       name,
-      category: categoryFor(candidate.protein.foods, name),
+      category: categoryFor(effectiveProtein.foods, name),
       area: '日本の家庭料理',
-      tags: tagsFor(candidate, candidate.ingredients, candidate.protein.foods),
-      ingredients: sourceIngredients,
-      steps: compressSteps(sourceSteps),
-      timeMinutes: timeFromLd || (Number.isFinite(candidate.timeMinutes) && candidate.timeMinutes > 0 ? candidate.timeMinutes : null),
-      calories: Number.isFinite(candidate.calories) ? candidate.calories : null,
-      saltGrams: Number.isFinite(candidate.saltGrams) ? candidate.saltGrams : null,
-      servings: Number.isFinite(candidate.servings) ? candidate.servings : null,
-      proteinScore: candidate.protein.score,
-      proteinLabel: candidate.protein.score >= 12 ? 'かなり高め' : '高め',
-      proteinFoods: candidate.protein.foods,
+      tags: tagsFor({ ...candidate, name }, liveIngredientRows, effectiveProtein.foods),
+      ingredients: ldIngredients,
+      steps: compressSteps(ldSteps),
+      timeMinutes: timeFromLd,
+      calories: null,
+      saltGrams: null,
+      servings: null,
+      proteinScore: effectiveProtein.score,
+      proteinLabel: effectiveProtein.score >= 12 ? 'かなり高め' : '高め',
+      proteinFoods: effectiveProtein.foods,
       goals: [...new Set(goals)],
       sourceName: 'キッコーマン ホームクッキング',
       sourceDomain: 'kikkoman.co.jp',
@@ -392,7 +448,7 @@ async function main() {
       checkedAt: verification.checkedAt,
       pageStatus: verification.status,
       pageTitleMatched: verification.titleMatched,
-      dataOrigin: ldIngredients.length >= 3 || ldSteps.length >= 1 ? '現在の公開ページ' : '公開ページ確認済み・公開データから構成',
+      dataOrigin: '現在の公開ページ',
     };
   });
 
@@ -402,16 +458,17 @@ async function main() {
     outputCount: recipes.length,
     source: 'キッコーマン ホームクッキング',
     sourceDatasetCommit: SOURCE_COMMIT,
-    pagesRequested: toCheck.length,
+    candidateIdsFromIngredientData: ingredientsById.size,
+    proteinCandidates: candidates.length,
+    pagesRequested: verifications.length,
     pagesReachable: verifications.filter(item => item.verification.ok).length,
     pagesFailed: verifications.filter(item => !item.verification.ok).length,
     pagesWithRecipeJsonLd: verifications.filter(item => item.verification.jsonLd).length,
     exactTitleMatches: recipes.filter(item => item.pageTitleMatched).length,
     allVisibleTextJapanese: true,
-    records: valid.map(({ candidate, verification }, index) => ({
+    records: valid.slice(0, TARGET).map(({ candidate, verification }, index) => ({
       index: index + 1,
       sourceRecipeId: candidate.id,
-      expectedName: candidate.name,
       finalUrl: verification.finalUrl,
       status: verification.status,
       pageTitle: verification.pageTitle,
@@ -421,18 +478,25 @@ async function main() {
     })),
     failures: verifications
       .filter(item => !item.verification.ok)
-      .map(item => ({ id: item.candidate.id, name: item.candidate.name, url: item.candidate.url, error: item.verification.error })),
+      .map(item => ({
+        id: item.candidate.id,
+        url: item.candidate.url,
+        error: item.verification.error,
+      })),
   };
 
   if (recipes.length !== TARGET) throw new Error(`出力件数が${recipes.length}件です。`);
-  if (new Set(recipes.map(item => item.sourceUrl)).size !== TARGET) throw new Error('出典URLが重複しています。');
+  if (new Set(recipes.map(item => item.sourceUrl)).size !== TARGET) {
+    throw new Error('出典URLが重複しています。');
+  }
   if (recipes.some(item => !item.name || item.ingredients.length < 3 || item.steps.length < 1 || !item.sourceUrl)) {
     throw new Error('必須データが欠けているレシピがあります。');
   }
 
-  await fs.writeFile('recipes.json', JSON.stringify(recipes, null, 2) + '\n', 'utf8');
-  await fs.writeFile('recipes-validation.json', JSON.stringify(report, null, 2) + '\n', 'utf8');
-  console.log(`完了: 日本語レシピ${recipes.length}件。`);
+  await fs.writeFile('recipes.json', `${JSON.stringify(recipes, null, 2)}\n`, 'utf8');
+  await fs.writeFile('recipes-validation.json', `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+
+  console.log(`完了: ${recipes.length}件をrecipes.jsonへ保存しました。`);
 }
 
 main().catch(error => {
