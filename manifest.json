@@ -1,0 +1,9 @@
+{
+  "name": "今夜の筋メシ",
+  "short_name": "筋メシ",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f3efe7",
+  "theme_color": "#f3efe7",
+  "description": "実在する公開レシピから筋トレ向けの夕食を提案"
+}

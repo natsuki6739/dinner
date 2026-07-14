@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f3efe7">
+  <meta name="description" content="日本語の実在レシピ500件から筋トレ向けの夕食候補を提案するアプリ">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./styles.css?v=20260714-2">
+  <title>今夜の筋メシ</title>
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <p class="eyebrow">筋トレ向け夕食提案</p>
+      <h1>今夜の筋メシ</h1>
+      <p class="lead">
+        日本の公開レシピを1ページずつ確認し、料理名・材料・分量・手順を日本語で整理しています。
+      </p>
+
+      <div class="status-row">
+        <span id="recipeCount" class="status-chip">レシピを読み込み中…</span>
+        <span id="sourceCount" class="status-chip secondary-chip hidden"></span>
+        <span id="checkedAt" class="status-chip secondary-chip hidden"></span>
+      </div>
+
+      <div id="errorBox" class="error-box hidden" role="alert"></div>
+    </header>
+
+    <section class="card controls">
+      <p class="eyebrow">条件を選ぶ</p>
+      <h2>今夜の条件</h2>
+
+      <div class="two-column">
+        <label>
+          目的
+          <select id="goal">
+            <option value="muscle">筋肉をつけたい</option>
+            <option value="cut">減量したい</option>
+            <option value="maintain">維持したい</option>
+            <option value="any">おまかせ</option>
+          </select>
+        </label>
+
+        <label>
+          調理時間
+          <select id="maxTime">
+            <option value="any">指定しない</option>
+            <option value="15">15分以内</option>
+            <option value="30">30分以内</option>
+            <option value="60">60分以内</option>
+          </select>
+        </label>
+      </div>
+
+      <label>
+        使いたい食材
+        <input id="includeWords" placeholder="例：鶏むね肉、卵、豆腐">
+      </label>
+
+      <label>
+        避けたい食材
+        <input id="excludeWords" placeholder="例：魚、辛いもの、ナッツ">
+      </label>
+
+      <button id="pickButton" class="primary full">今夜の献立を提案</button>
+    </section>
+
+    <section id="resultCard" class="card hidden" aria-live="polite">
+      <div class="result-head">
+        <div>
+          <p class="eyebrow">今日の候補</p>
+          <h2 id="mealName"></h2>
+          <p id="mealMeta" class="muted"></p>
+        </div>
+        <span id="timeBadge" class="pill"></span>
+      </div>
+
+      <div id="goalBadges" class="badges"></div>
+
+      <h3>材料・分量</h3>
+      <ul id="ingredientList"></ul>
+
+      <h3>簡易手順</h3>
+      <ol id="stepList"></ol>
+
+      <p class="notice">
+        手順は元ページの調理内容を保ちながら短く言い換えています。
+        加熱時間や火の通りは、出典ページでも確認してください。
+      </p>
+
+      <a id="sourceLink" class="source-link" target="_blank" rel="noopener noreferrer">
+        元レシピを確認
+      </a>
+      <button id="anotherButton" class="secondary full">別の候補を見る</button>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">全件確認</p>
+          <h2>全500件一覧</h2>
+        </div>
+        <button id="toggleCatalogButton" class="text-button">一覧を開く</button>
+      </div>
+
+      <div id="catalogArea" class="hidden">
+        <input id="catalogSearch" placeholder="料理名・食材・分類で検索">
+        <p id="catalogCount" class="muted"></p>
+        <div id="catalog"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">過去の候補</p>
+          <h2>履歴</h2>
+        </div>
+        <button id="clearHistoryButton" class="text-button">削除</button>
+      </div>
+      <div id="history" class="muted">まだありません。</div>
+    </section>
+
+    <details class="card">
+      <summary>データについて</summary>
+      <p class="muted">
+        公開中の日本語レシピページをHTTPで1件ずつ確認し、到達できた500件だけを収録します。
+        架空の料理や食材の組み合わせは作りません。写真は転載していません。
+        たんぱく質の表示は使用食材による分類で、栄養成分の実測値ではありません。
+      </p>
+      <p><a href="./recipes.json" target="_blank" rel="noopener">料理データを見る</a></p>
+      <p><a href="./recipes-validation.json" target="_blank" rel="noopener">500ページの確認結果を見る</a></p>
+      <div id="domainList" class="domain-list"></div>
+    </details>
+
+    <footer>
+      今後の料理更新は <code>recipes.json</code> の差し替えだけで反映されます。履歴はこの端末内に保存されます。
+    </footer>
+  </main>
+
+  <script src="./app.js?v=20260714-2"></script>
+</body>
+</html>
