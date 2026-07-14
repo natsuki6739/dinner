@@ -1,0 +1,608 @@
+{
+  "updatedAt": "2026-07-14T13:09:18.576Z",
+  "checked": 1600,
+  "valid": 1070,
+  "eligible": 874,
+  "recentFailures": [
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10008332/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10006018/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10005500/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10008335/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10011735/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://park.ajinomoto.co.jp/recipe/card/710413/",
+      "source": "味の素パーク",
+      "reason": "HTTP 403: https://park.ajinomoto.co.jp/recipe/card/710413/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010026/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10010026/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010024/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10006016/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010603/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10010603/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00010089/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10003414/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://park.ajinomoto.co.jp/recipe/card/801903/",
+      "source": "味の素パーク",
+      "reason": "HTTP 403: https://park.ajinomoto.co.jp/recipe/card/801903/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00007119/index.html",
+      "source": "キッコーマン ホームクッキング",
+      "reason": "HTTP 403: https://www.kikkoman.co.jp/homecook/search/recipe/00007119/index.html"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00010082/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=001145",
+      "source": "ミツカン おうちレシピ",
+      "reason": "デザート"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00010080/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10008962/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00011526/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=001135",
+      "source": "ミツカン おうちレシピ",
+      "reason": "デザート"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10008965/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10002491/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10006681/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=009808",
+      "source": "ミツカン おうちレシピ",
+      "reason": "HTTP 404: https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=009808"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10002846/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10006459/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://park.ajinomoto.co.jp/recipe/card/708099/",
+      "source": "味の素パーク",
+      "reason": "HTTP 403: https://park.ajinomoto.co.jp/recipe/card/708099/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00013188/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "デザート"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10011478/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10011478/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10006455/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10006457/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10003655/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://park.ajinomoto.co.jp/recipe/card/710278/",
+      "source": "味の素パーク",
+      "reason": "HTTP 403: https://park.ajinomoto.co.jp/recipe/card/710278/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00007236/index.html",
+      "source": "キッコーマン ホームクッキング",
+      "reason": "HTTP 404: https://www.kikkoman.co.jp/homecook/search/recipe/00007236/index.html"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00011133/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "デザート"
+    },
+    {
+      "ok": false,
+      "url": "https://www.mizkan.co.jp/ouchirecipe/recipe/index.html?menu_id=702687",
+      "source": "ミツカン おうちレシピ",
+      "reason": "HTTP 404: https://www.mizkan.co.jp/ouchirecipe/recipe/index.html?menu_id=702687"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10003657/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00007215/index.html",
+      "source": "キッコーマン ホームクッキング",
+      "reason": "HTTP 404: https://www.kikkoman.co.jp/homecook/search/recipe/00007215/index.html"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00011136/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010957/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10010957/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00011138/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00013934/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00013932/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10001471/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10001471/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10012051/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10012051/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10001266/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10001266/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00050048/index.html",
+      "source": "キッコーマン ホームクッキング",
+      "reason": "HTTP 404: https://www.kikkoman.co.jp/homecook/search/recipe/00050048/index.html"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00009434/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://park.ajinomoto.co.jp/recipe/card/708292/",
+      "source": "味の素パーク",
+      "reason": "デザート"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00012174/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10000127/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00010848/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://park.ajinomoto.co.jp/recipe/card/704254/",
+      "source": "味の素パーク",
+      "reason": "デザート"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10013943/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10013943/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00013455/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=019165",
+      "source": "ミツカン おうちレシピ",
+      "reason": "HTTP 404: https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=019165"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10013948/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10013948/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00012714/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://park.ajinomoto.co.jp/recipe/card/800306/",
+      "source": "味の素パーク",
+      "reason": "HTTP 403: https://park.ajinomoto.co.jp/recipe/card/800306/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10011024/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00012716/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010395/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10005770/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10011021/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00012713/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00002039/index.html",
+      "source": "キッコーマン ホームクッキング",
+      "reason": "HTTP 403: https://www.kikkoman.co.jp/homecook/search/recipe/00002039/index.html"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10011023/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://park.ajinomoto.co.jp/recipe/card/704611/",
+      "source": "味の素パーク",
+      "reason": "デザート"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00052840/",
+      "source": "キッコーマン ホームクッキング",
+      "reason": "デザート"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10006205/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10006207/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10005777/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010347/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10011488/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10011488/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10011486/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10012664/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10012664/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10012662/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10012662/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00013810/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10001832/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00013812/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10011876/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00013817/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010921/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10010921/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010927/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10010927/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00003939/index.html",
+      "source": "キッコーマン ホームクッキング",
+      "reason": "HTTP 403: https://www.kikkoman.co.jp/homecook/search/recipe/00003939/index.html"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010928/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10010928/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=021208",
+      "source": "ミツカン おうちレシピ",
+      "reason": "HTTP 404: https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=021208"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kikkoman.co.jp/homecook/search/recipe/00051923/index.html",
+      "source": "キッコーマン ホームクッキング",
+      "reason": "HTTP 404: https://www.kikkoman.co.jp/homecook/search/recipe/00051923/index.html"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10010929/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10010929/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.mizkan.co.jp/ouchirecipe/recipe/index.html?menu_id=19778",
+      "source": "ミツカン おうちレシピ",
+      "reason": "HTTP 404: https://www.mizkan.co.jp/ouchirecipe/recipe/index.html?menu_id=19778"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10012002/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10012002/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10012925/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10012925/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10012926/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "HTTP 404: https://www.kewpie.co.jp/recipes/recipe/QP10012926/"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00011310/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "デザート"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00013292/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10009814/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=009809",
+      "source": "ミツカン おうちレシピ",
+      "reason": "HTTP 404: https://www.mizkan.co.jp/ouchirecipe/recipe/?menu_id=009809"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10001078/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP10001075/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    },
+    {
+      "ok": false,
+      "url": "https://www.kewpie.co.jp/recipes/recipe/QP00013264/",
+      "source": "キユーピー とっておきレシピ",
+      "reason": "手順なし"
+    }
+  ]
+}
