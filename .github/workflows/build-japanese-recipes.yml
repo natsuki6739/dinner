@@ -1,0 +1,56 @@
+name: Build verified Japanese recipes
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-japanese-recipes
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check scripts
+        run: |
+          node --check scripts/build-japanese-recipes.mjs
+          node --check app.js
+          node --check sw.js
+
+      - name: Verify pages and generate 500 recipes
+        run: node scripts/build-japanese-recipes.mjs
+
+      - name: Validate output
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const recipes = JSON.parse(fs.readFileSync('recipes.json', 'utf8'));
+          const report = JSON.parse(fs.readFileSync('recipes-validation.json', 'utf8'));
+          if (!Array.isArray(recipes) || recipes.length !== 500) throw new Error(`recipes.json: ${recipes.length}件`);
+          if (new Set(recipes.map(r => r.sourceUrl)).size !== 500) throw new Error('出典URLに重複があります');
+          if (recipes.some(r => !r.name || !Array.isArray(r.ingredients) || r.ingredients.length < 3 || !Array.isArray(r.steps) || !r.steps.length || !r.sourceUrl)) {
+            throw new Error('必須項目が不足しています');
+          }
+          if (report.outputCount !== 500) throw new Error('検証報告が500件ではありません');
+          console.log('500件の検証に合格しました');
+          NODE
+
+      - name: Commit generated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add recipes.json recipes-validation.json
+          git commit -m "Add 500 verified Japanese recipes" || exit 0
+          git push
